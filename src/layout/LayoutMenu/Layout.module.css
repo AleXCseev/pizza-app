@@ -22,6 +22,15 @@
     gap: 14px;
     text-decoration: none;
     color: var(--text-color);
+    transition: 0.3s ease;
+}
+
+.link:hover {
+    color: var(--primary-color);
+}
+
+.active {
+    color: var(--primary-color);
 }
 
 .user {
