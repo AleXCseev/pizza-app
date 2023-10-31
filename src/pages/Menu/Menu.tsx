@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import axios, { AxiosError } from "axios"
 import { MenuList } from "./MenuList/MenuList"
 
-export const Menu = () => {
+const Menu = () => {
     const [products, setProducts] = useState<Product[]>([])
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [error, setError] = useState<string | undefined>();
@@ -46,3 +46,5 @@ export const Menu = () => {
         </>
     )
 }
+
+export default Menu;
