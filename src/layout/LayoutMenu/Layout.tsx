@@ -2,12 +2,16 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom"
 import styles from "./Layout.module.css"
 import { Button } from "../../components/Button/Button"
 import cn from 'classnames'
+import { AppDispatch } from "../../store/store"
+import { useDispatch } from "react-redux"
+import { logout } from "../../store/user.slice"
 
 export const Layout = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch<AppDispatch>();
 
-    const logout = () => {
-        localStorage.removeItem("jwt");
+    const logoutUser = () => {
+        dispatch(logout())
         navigate('/auth/login')
     }
 
@@ -37,7 +41,7 @@ export const Layout = () => {
                         Корзина
                     </NavLink>
                 </div>
-                <Button className={styles['exit']} onClick={logout}>
+                <Button className={styles['exit']} onClick={logoutUser}>
                     <img src="/out.svg" alt="" />
                     Выйти
                 </Button>
