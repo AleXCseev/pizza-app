@@ -1,5 +1,6 @@
 .input-wrapper {
     position: relative;
+    width: auto;
 }
 
 .input {
@@ -11,7 +12,8 @@
     background: #FCFCFD;
     border-radius: 10px;
     padding: 16px 30px 16px 44px;
-    min-width: 180px;
+    min-width: 260px;
+    width: auto;
 }
 
 .input::placeholder {
