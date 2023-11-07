@@ -57,7 +57,7 @@ export const Login = () => {
             </form>
             <div className={styles['links']}>
                 <p>Нет Аккаунта?</p>
-                <Link to="auth/register">Зарегестрироваться</Link>
+                <Link to="/auth/register">Зарегестрироваться</Link>
             </div>
             
         </div>
