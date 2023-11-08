@@ -45,9 +45,9 @@ export const Layout = () => {
                         [styles['active']]: isActive
                     })}>
                         <img src="/menu-icon.svg" alt="" />
-                        Корзина
+                        Корзина <span className={styles['count']}>{items.reduce((accum, item) => accum += item.count, 0)}</span>
                     </NavLink>
-                    {items.reduce((accum, item) => accum += item.count, 0)}
+                    
                 </div>
                 <Button className={styles['exit']} onClick={logoutUser}>
                     <img src="/out.svg" alt="" />
