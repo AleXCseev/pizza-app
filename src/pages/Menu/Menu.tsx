@@ -46,7 +46,7 @@ const Menu = () => {
     return (
         <>
             <div className={styles['head']}>
-                <Headling>Hello World</Headling>
+                <Headling>Меню</Headling>
                 <Search type="text" placeholder="Введите блюдо или состав" onChange={updateFilter} />
             </div>
             <div>
