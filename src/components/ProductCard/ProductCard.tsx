@@ -4,14 +4,14 @@ import { ProductCardProps } from "./ProductCard.props";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../store/store";
-import { add } from "../../store/cart.slice";
+import { cartSliceActions } from "../../store/cart.slice";
 
 const ProductCard = (props: ProductCardProps) => {
     const dispatch = useDispatch<AppDispatch>()
 
     const addToCart = (e: MouseEvent) => {
         e.preventDefault();
-        dispatch(add(props.id))
+        dispatch(cartSliceActions.add(props.id))
     }
 
     return (

@@ -1,11 +1,6 @@
 
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { loadState } from "./storage";
-import axios, { AxiosError } from "axios";
-import { LoginResponse } from "../interfaces/auth.interface";
-import { Profile } from "../interfaces/user.interface"
-import { PREFIX } from "../helpers/API";
-import { RootState } from "./store";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+
 
 export interface CartItem {
     id: number,
@@ -25,7 +20,7 @@ export const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
-       add: (state, action: PayloadAction<number>) => {
+        add: (state, action: PayloadAction<number>) => {
             const existed = state.items.find(i => i.id === action.payload)
             if(!existed) {
                 state.items.push({ id: action.payload, count: 1 })
@@ -37,12 +32,29 @@ export const cartSlice = createSlice({
                 }
                 return i;
             })
-       }
-    },
-    extraReducers: (builder) => {
-       
+            
+        },
+        remove: (state, action: PayloadAction<number>) => {
+            const existed = state.items.find(i => i.id === action.payload)
+            if(!existed) {
+                return;
+            }
+            if(existed.count === 1) {
+                state.items = state.items.filter(i => i.id !== action.payload)
+            } else {
+                state.items.map(i => {
+                    if(i.id === action.payload) {
+                        i.count -= 1;
+                    }
+                    return i;
+                })
+            }
+        },
+        delete: (state, action: PayloadAction<number>) => {
+            state.items = state.items.filter(i => i.id !== action.payload)
+        }
     }
 })
 
 export default cartSlice.reducer;
-export const { add } = cartSlice.actions
+export const cartSliceActions = cartSlice.actions

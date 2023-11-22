@@ -1,0 +1,102 @@
+.item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    max-width: 512px;
+    margin-bottom: 27px;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 8px 0;
+}
+
+.image {
+    width: 82px;
+    height: 82px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-radius: 20px;
+    box-shadow: 0px 8px 25px rgba(224, 219, 196, 0.90);
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+.actions {
+    margin-left: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    max-width: 89px;
+    margin-right: 17px;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.name {
+    color: var(--text-color);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.currency {
+    color: var(--primary-color);
+    font-family: Open Sans;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.currency span {
+    font-weight: 600;
+}
+
+.count {
+    width: auto;
+    color: var(--text-color);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.minus, .plus {
+    width: 28px;
+    height: 28px;
+    border-radius: 100%;
+    border: 1px solid var(--primary-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    cursor: pointer;
+    box-shadow: 0px 8px 25px rgba(224, 219, 196, 0.90);
+}
+
+.plus {
+    background-color: var(--primary-color);
+}
+
+.remove {
+    width: 17px;
+    height: 17px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    cursor: pointer;
+    border: none;
+    margin-top: 6px;
+}
+
