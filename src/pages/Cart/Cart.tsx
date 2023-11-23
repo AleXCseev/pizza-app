@@ -20,18 +20,13 @@ export const Cart = () => {
     const navigate = useNavigate();
     const dispatch  = useDispatch<AppDispatch>()
 
-    const total = (): number | undefined => {
-        if(items.length !== 0) {
-            const result = items.map(i => {
-                const product = cartProducts.find(p => p.id === i.id);
-                if(!product) {
-                    return 0;
-                }
-                return i.count * product.price;
-            }).reduce((accum, i) => accum += i)
-            return  result
-        } 
-    } 
+    const total = items.map(i => {
+        const product = cartProducts.find(p => p.id === i.id);
+        if(!product) {
+            return 0;
+        }
+        return i.count * product.price;
+    }).reduce((accum, i) => accum += i)
 
     const getItem = async (id: number) => {
         const {data} = await axios.get<Product>(`${PREFIX}/products/${id}`)
@@ -61,38 +56,32 @@ export const Cart = () => {
     }, [items])
 
     return (
-
-        <>
-            {items.length === 0 ? 
-                <Headling className={styles['title']}>Корзина пуста</Headling> : 
-                <>
-                    <Headling className={styles['title']}>Корзина</Headling>
-                    {items.map(i => {
-                        const product = cartProducts.find(p => p.id === i.id);
-                        if(!product) {
-                            return 
-                        }
-                        return <CartItem key={product.id} count={i.count} {...product}/>
-                    })}
-                    <div className={styles['line']}>
-                        <p className={styles['text']}>Итог</p>
-                        <p className={styles['price']}>{total()} <span>$</span></p>
-                    </div>
-                    <hr className={styles['hr']} />
-                    <div className={styles['line']}>
-                        <p className={styles['text']}>Доставка</p>
-                        <p className={styles['price']}>{DELIVERY} <span>$</span></p>
-                    </div>
-                    <hr className={styles['hr']} />
-                    <div className={styles['line']}>
-                        <p className={styles['text']}>Итог <span className={styles['total-count']}>({items.length})</span></p>
-                        <p className={styles['price']}>{total() + DELIVERY} <span>$</span></p>
-                    </div>
-                    <div className={styles['checkout']}>
-                        <Button onClick={checkout} appearence="big">Оформить</Button>
-                    </div>
-                </>
-            }
-        </>
+            <>
+                <Headling className={styles['title']}>Корзина</Headling>
+                {items.map(i => {
+                    const product = cartProducts.find(p => p.id === i.id);
+                    if(!product) {
+                        return 
+                    }
+                    return <CartItem key={product.id} count={i.count} {...product}/>
+                })}
+                <div className={styles['line']}>
+                    <p className={styles['text']}>Итог</p>
+                    <p className={styles['price']}>{total} <span>$</span></p>
+                </div>
+                <hr className={styles['hr']} />
+                <div className={styles['line']}>
+                    <p className={styles['text']}>Доставка</p>
+                    <p className={styles['price']}>{DELIVERY} <span>$</span></p>
+                </div>
+                <hr className={styles['hr']} />
+                <div className={styles['line']}>
+                    <p className={styles['text']}>Итог <span className={styles['total-count']}>({items.length})</span></p>
+                    <p className={styles['price']}>{total + DELIVERY} <span>$</span></p>
+                </div>
+                <div className={styles['checkout']}>
+                    <Button onClick={checkout} appearence="big">Оформить</Button>
+                </div>
+            </>
     )
 }
