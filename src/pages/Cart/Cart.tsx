@@ -26,7 +26,8 @@ export const Cart = () => {
             return 0;
         }
         return i.count * product.price;
-    }).reduce((accum, i) => accum += i)
+    }).reduce((accum, i) => accum += i, 0)
+
 
     const getItem = async (id: number) => {
         const {data} = await axios.get<Product>(`${PREFIX}/products/${id}`)
@@ -46,7 +47,6 @@ export const Cart = () => {
                 Authorization: `Bearer ${jwt}`
             }
         })
-        console.log(data)
         dispatch(cartSliceActions.clean())
         navigate('/success')
     }
@@ -57,31 +57,39 @@ export const Cart = () => {
 
     return (
             <>
-                <Headling className={styles['title']}>Корзина</Headling>
-                {items.map(i => {
-                    const product = cartProducts.find(p => p.id === i.id);
-                    if(!product) {
-                        return 
-                    }
-                    return <CartItem key={product.id} count={i.count} {...product}/>
-                })}
-                <div className={styles['line']}>
-                    <p className={styles['text']}>Итог</p>
-                    <p className={styles['price']}>{total} <span>$</span></p>
-                </div>
-                <hr className={styles['hr']} />
-                <div className={styles['line']}>
-                    <p className={styles['text']}>Доставка</p>
-                    <p className={styles['price']}>{DELIVERY} <span>$</span></p>
-                </div>
-                <hr className={styles['hr']} />
-                <div className={styles['line']}>
-                    <p className={styles['text']}>Итог <span className={styles['total-count']}>({items.length})</span></p>
-                    <p className={styles['price']}>{total + DELIVERY} <span>$</span></p>
-                </div>
-                <div className={styles['checkout']}>
-                    <Button onClick={checkout} appearence="big">Оформить</Button>
-                </div>
+                
+                {
+                    items.length === 0 ? <Headling className={styles['title']}>Корзина пуста</Headling> :
+                    <>
+                        <Headling className={styles['title']}>Корзина</Headling>
+                        { items.map(i => {
+                            const product = cartProducts.find(p => p.id === i.id);
+                            console.log(product)
+                            if(!product) {
+                                return;
+                            }
+                            return <CartItem key={product.id} count={i.count} {...product}/>
+                        })}
+                        <div className={styles['line']}>
+                            <p className={styles['text']}>Итог</p>
+                            <p className={styles['price']}>{total} <span>$</span></p>
+                        </div>
+                        <hr className={styles['hr']} />
+                        <div className={styles['line']}>
+                            <p className={styles['text']}>Доставка</p>
+                            <p className={styles['price']}>{DELIVERY} <span>$</span></p>
+                        </div>
+                        <hr className={styles['hr']} />
+                        <div className={styles['line']}>
+                            <p className={styles['text']}>Итог <span className={styles['total-count']}>({items.length})</span></p>
+                            <p className={styles['price']}>{total + DELIVERY} <span>$</span></p>
+                        </div>
+                        <div className={styles['checkout']}>
+                            <Button onClick={checkout} appearence="big">Оформить</Button>
+                        </div>
+                    </>
+                }
+               
             </>
     )
 }

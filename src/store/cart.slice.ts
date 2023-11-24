@@ -51,6 +51,7 @@ export const cartSlice = createSlice({
                     }
                     return i;
                 })
+                return;
             }
         },
         delete: (state, action: PayloadAction<number>) => {

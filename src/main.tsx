@@ -16,6 +16,7 @@ import { RequireAuth } from './helpers/RequireAuth'
 import { Provider } from 'react-redux'
 import { store } from './store/store'
 import { Success } from './pages/Success/Success'
+import { ErrorBoundary } from "react-error-boundary";
 
 const Menu = lazy(() => import('./pages/Menu/Menu'))
 
@@ -30,7 +31,8 @@ const router = createBrowserRouter([
       },
       {
         path: '/cart',
-        element: <Cart/>
+        element: <Cart/>,
+        errorElement: <>Error</>,
       },
       {
         path: '/success',
@@ -70,8 +72,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router}/>
-    </Provider>
+    <ErrorBoundary fallback={<div>Something went wrong</div>}>
+      <Provider store={store}>
+        <RouterProvider router={router}/>
+      </Provider>
+    </ErrorBoundary>
   </React.StrictMode>,
 )
